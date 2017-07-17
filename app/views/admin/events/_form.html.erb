@@ -25,3 +25,12 @@
   <%= f.text_field :friendly_id, :require => true, :class => "form-control" %>
   <p class="help-block">限小写字母、数字及横线，将作为网址的一部分</p>
 </div>
+
+<div class="btn-group" data-toggle="buttons">
+  <% Event::STATUS.each do |status| %>
+    <label class="btn btn-default <%= (status == f.object.status)? 'active' : '' %>">
+      <%= f.radio_button :status, status %>
+      <%= t(status, :scope => "event.status") %>
+    </label>
+  <% end %>
+</div>
