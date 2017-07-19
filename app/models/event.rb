@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :category, :optional => true
-  
+
   STATUS = ["draft", "public", "private"]
   validates_inclusion_of  :status, :in => STATUS
 
@@ -20,5 +20,8 @@ class Event < ApplicationRecord
  def generate_friendly_id
    self.friendly_id ||= SecureRandom.uuid
  end
+
+ has_many :tickets, :dependent => :destroy
+ accepts_nested_attributes_for :tickets, :allow_destroy => true, :reject_if => :all_blank
 
 end
