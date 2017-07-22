@@ -1,5 +1,7 @@
 class Event < ApplicationRecord
   mount_uploader :logo, EventLogoUploader
+  mount_uploaders :images, EventImageUploader
+  serialize :images, JSON
 
   belongs_to :category, :optional => true
 
@@ -28,6 +30,9 @@ class Event < ApplicationRecord
 
  has_many :tickets, :dependent => :destroy
  accepts_nested_attributes_for :tickets, :allow_destroy => true, :reject_if => :all_blank
+
+ has_many :attachments, :class_name => "EventAttachment", :dependent => :destroy
+ accepts_nested_attributes_for :attachments, :allow_destroy => true, :reject_if => :all_blank
 
  include RankedModel
  ranks :row_order
