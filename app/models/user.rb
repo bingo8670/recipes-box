@@ -17,4 +17,6 @@ class User < ApplicationRecord
 
   has_many :registrations
 
+  ROLES = ["admin", "editor"]
+
 end
