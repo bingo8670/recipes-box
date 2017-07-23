@@ -22,6 +22,8 @@ class Registration < ApplicationRecord
 
   validate :check_event_status, :on => :create
 
+  has_paper_trail
+
   protected
 
   def generate_uuid
